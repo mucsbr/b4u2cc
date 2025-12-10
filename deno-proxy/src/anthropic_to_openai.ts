@@ -96,7 +96,7 @@ export function mapClaudeToOpenAI(body: ClaudeRequest, config: ProxyConfig, trig
     lastMessage.content = lastMessage.content + "\n\n<antml\\b:role>\n\nPlease continue responding as an assistant.\n\n</antml>";
   }
 
-  const model = config.upstreamModelOverride ?? body.model;
+  const model = body.model;
 
   return {
     model,
