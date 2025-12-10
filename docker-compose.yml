@@ -1,0 +1,26 @@
+services:
+  b4u2cc-proxy:
+    build: .
+    ports:
+      - "3456:3456"
+    environment:
+      - UPSTREAM_BASE_URL=${UPSTREAM_BASE_URL}
+      - UPSTREAM_API_KEY=${UPSTREAM_API_KEY}
+      - UPSTREAM_MODEL=${UPSTREAM_MODEL:-}
+      - CLIENT_API_KEY=${CLIENT_API_KEY:-}
+      - PORT=3456
+      - HOST=0.0.0.0
+      - TIMEOUT_MS=${TIMEOUT_MS:-120000}
+      - AGGREGATION_INTERVAL_MS=${AGGREGATION_INTERVAL_MS:-35}
+      - MAX_REQUESTS_PER_MINUTE=${MAX_REQUESTS_PER_MINUTE:-10}
+      - TOKEN_MULTIPLIER=${TOKEN_MULTIPLIER:-1.0}
+      - CLAUDE_API_KEY=${CLAUDE_API_KEY:-}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOGGING_DISABLED=${LOGGING_DISABLED:-false}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3456/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
