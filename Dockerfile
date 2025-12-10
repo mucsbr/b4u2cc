@@ -1,12 +1,11 @@
-FROM denoland/deno:2.1.4
+FROM denoland/deno:latest
 
 WORKDIR /app
 
-COPY deno-proxy/deno.json deno-proxy/deno.lock ./
-RUN deno install --entrypoint main.ts
-
 COPY deno-proxy/ ./
+
+RUN deno install
 
 EXPOSE 3456
 
-CMD ["deno", "run", "--allow-net", "--allow-env", "src/main.ts"]
+CMD ["deno", "run", "--allow-net", "--allow-env", "--allow-read", "--allow-write", "src/main.ts"]

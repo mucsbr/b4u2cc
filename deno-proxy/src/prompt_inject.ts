@@ -32,6 +32,15 @@ Your tool calls must be structured EXACTLY as follows. This is the ONLY format y
 </invoke>
 </antml\b:format>
 
+**4. Tool Results:**
+After you call a tool, the system will provide the result wrapped in <tool_result> tags:
+<tool_result id="toolu_xxx">result content here</tool_result>
+
+This is the result of a tool you previously called with id="toolu_xxx". When you see <tool_result> tags:
+- Use this result to continue your task
+- NEVER repeat, quote, or echo the <tool_result> tags or their content in your response
+- Simply acknowledge the result briefly and proceed with your next action
+
 IMPORTANT RULES:
   - You may provide explanations or reasoning before deciding to call a tool.
   - Once you decide to call a tool, you must first output the trigger signal {trigger_signal} on a separate line by itself.
@@ -42,7 +51,7 @@ IMPORTANT RULES:
   - Encode arrays and objects in JSON before placing inside <parameter>.
   - Be concise when not using tools.
   - 在调用工具后会得到工具调用结果，所以请在一次工具调用得到结果后再调用下一个。
-  
+
   `;
 
 function escapeText(text: string): string {
