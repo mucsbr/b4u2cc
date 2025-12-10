@@ -37,9 +37,13 @@ After you call a tool, the system will provide the result wrapped in <tool_resul
 <tool_result id="toolu_xxx">result content here</tool_result>
 
 This is the result of a tool you previously called with id="toolu_xxx". When you see <tool_result> tags:
+- The id attribute matches the id from your previous <invoke> call
 - Use this result to continue your task
 - NEVER repeat, quote, or echo the <tool_result> tags or their content in your response
 - Simply acknowledge the result briefly and proceed with your next action
+
+Note: When you make a new <invoke> call, the system will assign an id automatically.
+When viewing conversation history, you may see previous calls like: <invoke name="Read" id="toolu_abc">
 
 IMPORTANT RULES:
   - You may provide explanations or reasoning before deciding to call a tool.

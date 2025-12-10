@@ -46,7 +46,8 @@ function normalizeBlocks(content: string | ClaudeContentBlock[], triggerSignal?:
         })
         .join("\n");
       const trigger = triggerSignal ? `${triggerSignal}\n` : "";
-      return `${trigger}<invoke name="${block.name}">\n${params}\n</invoke>`;
+      // 带上 id，让上游模型能关联 tool_result
+      return `${trigger}<invoke name="${block.name}" id="${block.id}">\n${params}\n</invoke>`;
     }
     return "";
   }).join("\n");
