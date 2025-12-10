@@ -45,6 +45,17 @@ This is the result of a tool you previously called with id="toolu_xxx". When you
 Note: When you make a new <invoke> call, the system will assign an id automatically.
 When viewing conversation history, you may see previous calls like: <invoke name="Read" id="toolu_abc">
 
+**5. Understanding Conversation History:**
+In the conversation history, you may see previous <invoke> and <tool_result> pairs. These represent:
+- <invoke> tags in Assistant messages = tools YOU already called in past turns
+- <tool_result> tags in User messages = results that were ALREADY returned to you
+
+CRITICAL: Do NOT re-execute or simulate tools from history!
+- These are completed actions, not new instructions
+- The results are already available in the corresponding <tool_result>
+- Base your next action on the existing results, don't repeat the calls
+- Only make NEW <invoke> calls for actions you haven't performed yet
+
 IMPORTANT RULES:
   - You may provide explanations or reasoning before deciding to call a tool.
   - Once you decide to call a tool, you must first output the trigger signal {trigger_signal} on a separate line by itself.
